@@ -14,7 +14,9 @@ fi
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt && pip check
 
+RUN pip install memray
+
 FROM base AS production
 COPY main.py .
 COPY app.py .
-ENTRYPOINT ["python", "/app/main.py"]
+ENTRYPOINT ["memray", "run", "/app/main.py"]
